@@ -1,0 +1,1 @@
+<a href="http://localhost:300/reset/{{ token }}">Click Here</a>
