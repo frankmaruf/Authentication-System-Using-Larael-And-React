@@ -1,14 +1,28 @@
 import React, { useEffect, useState } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import axios from "axios";
 const Login = () => {
+  const navigate = useNavigate();
+  const [redireact, setRedireact] = useState(false);
   const [data,setData] = useState({
-    email: "",
-    password: "",
+    email: "thefrankmaruf@gmail.com",
+    password: "1234",
   });
   const uselocation = useLocation();
-  const handleSubmit = (e) => {
+  const handleSubmit =  (e) => {
     e.preventDefault();
+    console.log('data',data);
+    axios.post("/login", {
+      email: data.email,
+      password: data.password,
+    }).then((res) => {
+      console.log("res", res);
+      if (res.data.message) {
+        navigate("/", { replace: true,state:{email:data.email}});
+
+      }
+    });
   };
   const handleInputChange = (e) => {
     setData({
@@ -42,10 +56,7 @@ const Login = () => {
 
         <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Label>Password</Form.Label>
-          <Form.Control type="password" placeholder="Password" />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicCheckbox">
-          <Form.Check type="checkbox" label="Check me out" />
+          <Form.Control onChange={handleInputChange} type="password" name="password" placeholder="Password" value={data.password} />
         </Form.Group>
         <Button variant="primary" type="submit">
           Submit
