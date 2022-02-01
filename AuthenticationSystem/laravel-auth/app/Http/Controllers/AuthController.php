@@ -30,10 +30,11 @@ class AuthController extends Controller
             'message' => 'User created successfully',
             'user' => $user
         ], 201);
-        return response($user,Response::HTTP_CREATED);
+        return response($user, Response::HTTP_CREATED);
     }
-    public function signin(Request $request){
-        if(!Auth::attempt($request->only('email','password'))){
+    public function signin(Request $request)
+    {
+        if (!Auth::attempt($request->only('email', 'password'))) {
             return response()->json([
                 'message' => 'Invalid credentials'
             ], 401);
@@ -45,22 +46,20 @@ class AuthController extends Controller
             'message' => 'User logged in successfully',
             'user' => $user,
             'token' => $token
-        ], 200)->withCookie(cookie('token',$token,60*24*7,'/','localhost',false,true));
+        ], 200)->withCookie(cookie('token', $token, 60 * 24 * 7, '/', 'localhost', false, true));
     }
-    public function user(Request $request){
-        // return $request->user();
-        // $user = Auth::user();
+    public function user(Request $request)
+    {
         return response()->json(Auth::user());
     }
-    public function logout(){
-        Auth::user()->tokens->each(function($token,$key){
+    public function logout()
+    {
+        Auth::user()->tokens->each(function ($token, $key) {
             $token->delete();
         });
-        // $cookie = cookie('token',null,0,'/','localhost',false,true);
         $cookie = Cookie::forget('token');
         return response()->json([
             'message' => 'User logged out successfully'
         ], 200)->withCookie($cookie);
     }
-
 }

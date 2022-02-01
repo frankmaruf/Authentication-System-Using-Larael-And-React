@@ -6,8 +6,8 @@ const Login = () => {
   const navigate = useNavigate();
   const [redireact, setRedireact] = useState(false);
   const [data,setData] = useState({
-    email: "thefrankmaruf@gmail.com",
-    password: "1234",
+    email: "",
+    password: "",
   });
   const uselocation = useLocation();
   const handleSubmit =  (e) => {
