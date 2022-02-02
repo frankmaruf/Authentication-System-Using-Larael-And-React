@@ -12,9 +12,11 @@
         "laravel/sanctum": "^2.14",
         "laravel/tinker": "^2.5",
         "rebing/graphql-laravel": "^8.2",
+        "symfony/mailer": "^5.4",
         "webonyx/graphql-php": "^14.11"
     },
     "require-dev": {
+        "barryvdh/laravel-ide-helper": "^2.12",
         "facade/ignition": "^2.5",
         "fakerphp/faker": "^1.9.1",
         "laravel/sail": "^1.0.1",

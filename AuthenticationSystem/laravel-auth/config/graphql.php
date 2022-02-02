@@ -74,12 +74,17 @@ return [
     'schemas' => [
         'default' => [
             'query' => [
+                'user' => \App\GraphQL\Queries\User\UserQuery::class,
+                'users' => \App\GraphQl\Queries\User\UsersQuery::class,
                 'quest' => \App\GraphQL\Queries\Quest\QuestQuery::class,
                 'quests' => \App\GraphQL\Queries\Quest\QuestsQuery::class,
                 'category' => \App\GraphQL\Queries\Category\CategoryQuery::class,
                 'categories' => \App\GraphQL\Queries\Category\CategoriesQuery::class,
             ],
             'mutation' => [
+                'createUser' => \App\GraphQL\Mutations\User\CreateUserMutation::class,
+                'updateUser' => \App\GraphQL\Mutations\User\UpdateUserMutation::class,
+                'deleteUser' => \App\GraphQL\Mutations\User\DeleteUserMutation::class,
                 'createQuest' => \App\GraphQL\Mutations\Quest\CreateQuestMutation::class,
                 'updateQuest' => \App\GraphQL\Mutations\Quest\UpdateQuestMutation::class,
                 'deleteQuest' => \App\GraphQL\Mutations\Quest\DeleteQuestMutation::class,
@@ -89,6 +94,7 @@ return [
             ],
             // The types only available in this schema
             'types' => [
+                'User' => \App\GraphQL\Types\UserType::class,
                 'Quest' => \App\GraphQL\Types\QuestType::class,
                 'Category' => \App\GraphQL\Types\CategoryType::class
              ],
