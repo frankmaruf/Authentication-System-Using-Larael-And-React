@@ -2,25 +2,30 @@ import { gql, useQuery } from '@apollo/client';
 import React from 'react';
 
 const ExchangeRates = () => {
-    const EXCHANGE_RATES = gql`
-  query GetExchangeRates {
-    rates(currency: "USD") {
-      currency
-      rate
-    }
-  }
+    const Users = gql`
+    query {
+        users {
+          id
+          first_name
+          last_name
+          email
+        }
+      }
 `;
-    const { loading, error, data } = useQuery(EXCHANGE_RATES);
+    const { loading, error, data } = useQuery(Users);
+    console.log(data);
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error Occur </p>
     else {
         return (
             <div>
-                <h1>Exchange Rates</h1>
+                <h1>Users</h1>
                 <ul>
-                    {data.rates.map(rate => (
-                        <li key={rate.currency}>
-                            {rate.currency} - {rate.rate}
+                    {data.users.map(user => (
+                        <li key={user.id}>
+                            <li>{user.first_name}</li>
+                            <li>{user.last_name}</li>
+                            <li>{user.email}</li>
                         </li>
                     ))}
                 </ul>

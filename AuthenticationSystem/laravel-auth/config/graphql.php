@@ -99,7 +99,11 @@ return [
                 'Category' => \App\GraphQL\Types\CategoryType::class
              ],
             // Laravel HTTP middleware
-            'middleware' => null,
+            'middleware' => [
+                // \App\Http\Middleware\ExampleMiddleware::class,
+               "cors" => \App\Http\Middleware\Cors::class,
+            ],
+
 
             // Which HTTP methods to support; must be given in UPPERCASE!
             'method' => ['GET', 'POST'],

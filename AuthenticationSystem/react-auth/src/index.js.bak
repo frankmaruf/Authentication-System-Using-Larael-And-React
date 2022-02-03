@@ -23,6 +23,7 @@ axios.defaults.withCredentials = true;
 // });
 const client = new ApolloClient({
   uri: "http://localhost:8000/graphql",
+  credentials: "include",
   cache: new InMemoryCache(),
 });
 
