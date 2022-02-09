@@ -4,7 +4,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 const Login = () => {
   const navigate = useNavigate();
-  const [redireact, setRedireact] = useState(false);
   const [data,setData] = useState({
     email: "",
     password: "",

@@ -12,8 +12,11 @@ const Header = () => {
     <Nav className="me-auto">
      <LinkContainer to={'/login'}>
       <Nav.Link>Login</Nav.Link></LinkContainer>
+      <LinkContainer to={'/loginql'}>
+      <Nav.Link>LoginQL </Nav.Link></LinkContainer>
       <LinkContainer to={'/register'}>
       <Nav.Link>Register</Nav.Link></LinkContainer>
+      
     </Nav>
     </Container>
   </Navbar>

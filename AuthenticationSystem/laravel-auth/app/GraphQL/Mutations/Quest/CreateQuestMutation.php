@@ -43,7 +43,6 @@ class CreateQuestMutation extends Mutation
             ]
         ];
     }
-
     public function resolve($root, $args)
     {
         $quest = new Quest();

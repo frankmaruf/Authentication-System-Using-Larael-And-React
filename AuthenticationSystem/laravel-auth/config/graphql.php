@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 return [
     'route' => [
@@ -91,17 +91,21 @@ return [
                 'createCategory' => \App\GraphQL\Mutations\Category\CreateCategoryMutation::class,
                 'updateCategory' => \App\GraphQL\Mutations\Category\UpdateCategoryMutation::class,
                 'deleteCategory' => \App\GraphQL\Mutations\Category\DeleteCategoryMutation::class,
+                'userLogin' => App\GraphQL\Mutations\Authentication\UserLoginMutation::class,
+
             ],
             // The types only available in this schema
             'types' => [
                 'User' => \App\GraphQL\Types\UserType::class,
                 'Quest' => \App\GraphQL\Types\QuestType::class,
                 'Category' => \App\GraphQL\Types\CategoryType::class
-             ],
+            ],
             // Laravel HTTP middleware
             'middleware' => [
-                // \App\Http\Middleware\ExampleMiddleware::class,
-               "cors" => \App\Http\Middleware\Cors::class,
+                // 'auth' => [
+                //     'only' => ['user', 'users'],
+                // \App\Http\Middleware\ExampleMiddleware::class,'
+
             ],
 
 
@@ -110,6 +114,16 @@ return [
 
             // An array of middlewares, overrides the global ones
             'execution_middleware' => null,
+        ],
+        'secret' => [
+            'query' => [
+                'mySecretQuery' => \App\GraphQL\Queries\Secret\MySecretQuery::class,
+            ],
+            'mutation' => [
+                'createSecret' => \App\GraphQL\Mutations\Secret\CreateSecretMutation::class,
+                'updateSecret' => \App\GraphQL\Mutations\Secret\UpdateSecretMutation::class,
+                'deleteSecret' => \App\GraphQL\Mutations\Secret\DeleteSecretMutation::class,
+            ],
         ],
     ],
 

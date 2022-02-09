@@ -1,27 +1,27 @@
-import { gql, useQuery } from '@apollo/client';
 import React from 'react';
+import { gql, useQuery } from '@apollo/client';
 
-const ExchangeRates = () => {
-    const Users = gql`
-    query {
-        users {
+const LoginGQL = () => {
+    const LOGIN = gql`
+    mutation login($email: String!, $password: String!) {
+      login(email: $email, password: $password) {
+        token
+        user {
           id
           first_name
           last_name
           email
         }
       }
-`;
-    const { loading, error, data } = useQuery(Users);
+    }
+  `;
+    const { loading, error, data } = useQuery(LOGIN);
     console.log(data);
-    if (loading) return <p>Loading...</p>;
-    if (error) return <p>Error Occur </p>
-    else {
-        return (
+ return (
             <div>
-                <h1>Users</h1>
+                <h1>User</h1>
                 <ul>
-                    {data.users.map(user => (
+                    {data.login.user.map(user => (
                         <li key={user.id}>
                             <li>{user.first_name}</li>
                             <li>{user.last_name}</li>
@@ -31,7 +31,5 @@ const ExchangeRates = () => {
                 </ul>
             </div>
         )
-    }
 };
-
-export default ExchangeRates;
+export default LoginGQL;

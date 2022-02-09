@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Navigate,useLocation } from 'react-router-dom';
-import ExchangeRates from './ExchangeRates';
+import Users from './Users';
 
 const Home = () => {
   const location = useLocation();
@@ -20,7 +20,7 @@ const Home = () => {
   return <>
     <div className="bg-red-400 h-5">Hello World</div>
     {data.email && <div>{data.email}</div>}
-    <ExchangeRates/>
+    <Users/>
   </>;
 };
 
