@@ -98,7 +98,8 @@ return [
             'types' => [
                 'User' => \App\GraphQL\Types\UserType::class,
                 'Quest' => \App\GraphQL\Types\QuestType::class,
-                'Category' => \App\GraphQL\Types\CategoryType::class
+                'Category' => \App\GraphQL\Types\CategoryType::class,
+                'LoginResponse' => \App\GraphQL\Types\Authentication\LoginResponseType::class,
             ],
             // Laravel HTTP middleware
             'middleware' => [

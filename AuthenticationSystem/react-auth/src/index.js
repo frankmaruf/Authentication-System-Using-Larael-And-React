@@ -40,7 +40,7 @@ client
       }
     `,
   })
-  .then((result) => console.log(result));
+  .then((result) => console.log("hello"));
 
 ReactDOM.render(
   <ApolloProvider client={client}>

@@ -5,6 +5,7 @@ namespace App\GraphQL\Mutations\Authentication;
 
 use App\Models\User;
 use Closure;
+use Exception;
 use GraphQL\Type\Definition\ResolveInfo;
 use GraphQL\Type\Definition\Type;
 use Rebing\GraphQL\Support\Mutation;
@@ -12,16 +13,19 @@ use Rebing\GraphQL\Support\Facades\GraphQL;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+// import Graphqltype
+use Rebing\GraphQL\Support\Type as GraphQLType;
 
 class UserLoginMutation extends Mutation
 {
     protected $attributes = [
         'name' => 'userLogin',
-        'description' => 'Login user'
+        'description' => 'Login user',
     ];
     public function type(): Type
     {
-        return GraphQL::type('User');
+        return GraphQL::type('LoginResponse');
     }
     /** @var \App\Models\MyUserModel $user **/
 
@@ -47,35 +51,22 @@ class UserLoginMutation extends Mutation
         if (!$user) {
             return null;
         }
-        else{
+        // if(Auth::user()->is_active == 0){
+        //     return null;
+        // }
+        // if($user && !Hash::check($args['password'], !Auth::user()->password)){
+        //     throw new Exception('Error login');
+        //     return null;
+        // }
             $user = User::where('email', $args['email'])->first();
-            $token = $user->createToken('authToken')->accessToken;
+            $token = $user->createToken('authToken')->plainTextToken;
+            $user->save();
             $cookie = Cookie::make('token', $token, 60*24*30);
-            $user = User::where('email', $args['email'])->first();
-            // save user token at database
-            return $user;
-        }
-        // $user = User::where('email', $args['email'])->first();
-        // if (!$user) {
-        //     return null;
-        // }
-        // if (!$user->isActive()) {
-        //     return null;
-        // }
-        // if (!$user->isPassword($args['password'])) {
-        //     return null;
-        // }
-        // $token = $user->createToken('authToken')->plainTextToken;
-        // $response = ['token' => $token];
-        // $cookie = Cookie::make('token', $token, 60 * 24 * 30);
-        // $response['cookie'] = $cookie;
-        // $response['user'] = $user;
-        // $response['user_id'] = $user->id;
-        // $response['user_first_name'] = $user->first_name;
-        // $response['user_email'] = $user->email;
-        // return $response;
+            $response = [
+                'user' => $user,
+                'access_token' => $token,
+                'cookie' => $cookie
+            ];
+            return $response;
     }
 }
-
-
-// if it's not work then try with Auth

@@ -13,7 +13,7 @@ const Users = () => {
       }
 `;
     const { loading, error, data } = useQuery(Users);
-    console.log(data);
+    // console.log(data);
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error Occur </p>
     else {
