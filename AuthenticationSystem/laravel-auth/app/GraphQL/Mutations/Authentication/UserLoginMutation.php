@@ -44,12 +44,17 @@ class UserLoginMutation extends Mutation
     }
     public function resolve($root, $args, $context, ResolveInfo $resolveInfo, Closure $getSelectFields)
     {
+        $message = "";
         $user = Auth::attempt([
             'email' => $args['email'],
             'password' => $args['password']
         ]);
         if (!$user) {
-            return null;
+            $message = "Invalid credentials";
+            $response = [
+                'message' => $message,
+            ];
+            return $response;
         }
         // if(Auth::user()->is_active == 0){
         //     return null;
@@ -59,13 +64,18 @@ class UserLoginMutation extends Mutation
         //     return null;
         // }
             $user = User::where('email', $args['email'])->first();
-            $token = $user->createToken('authToken')->plainTextToken;
+            $token = $user->createToken('authToken')->accessToken;
             $user->save();
-            $cookie = Cookie::make('token', $token, 60*24*30);
+            $expires_in = 60*24*30;
+            $message = 'Login Successfully';
+            $cookie = Cookie::make('token', $token, $expires_in);
             $response = [
                 'user' => $user,
                 'access_token' => $token,
-                'cookie' => $cookie
+                'cookie' => $cookie,
+                'expires_in' => $expires_in,
+                'token_type' => 'Bearer',
+                'message' => $message,
             ];
             return $response;
     }
