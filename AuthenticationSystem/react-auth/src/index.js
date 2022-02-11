@@ -25,6 +25,14 @@ const client = new ApolloClient({
   uri: "http://localhost:8000/graphql",
   credentials: "include",
   cache: new InMemoryCache(),
+  // request: (operation) => {
+  //   const token = localStorage.getItem("token");
+  //   operation.setContext({
+  //     headers: {
+  //       authorization: token ? `Bearer ${token}` : "",
+  //     },
+  //   });
+  // }
 });
 
 client

@@ -69,6 +69,7 @@ class UserLoginMutation extends Mutation
             $expires_in = 60*24*30;
             $message = 'Login Successfully';
             $cookie = Cookie::make('token', $token, $expires_in);
+            Cookie::queue($cookie);
             $response = [
                 'user' => $user,
                 'access_token' => $token,
@@ -79,4 +80,4 @@ class UserLoginMutation extends Mutation
             ];
             return $response;
     }
-}
+    }

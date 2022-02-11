@@ -106,6 +106,8 @@ return [
                 // 'auth' => [
                 //     'only' => ['user', 'users'],
                 // \App\Http\Middleware\ExampleMiddleware::class,'
+                \Illuminate\Cookie\Middleware\EncryptCookies::class,
+                \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
 
             ],
 

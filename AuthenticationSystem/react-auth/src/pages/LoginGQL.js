@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { gql, useMutation, useQuery } from "@apollo/client";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
-import { assertValidSDL } from "graphql/validation/validate";
 
 const LoginGQL = () => {
   const navigate = useNavigate();
@@ -24,6 +23,7 @@ const LoginGQL = () => {
       password: "${loginData.password}"
     )
     {
+      cookie
       message
       access_token
     }
