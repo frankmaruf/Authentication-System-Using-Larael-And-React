@@ -12,6 +12,8 @@ use Rebing\GraphQL\Support\Query;
 class UsersQuery extends Query{
     protected $middleware = [
         \App\GraphQl\Middleware\ResolvePage::class,
+        \App\GraphQL\Middleware\AuthHeader::class,
+        // 'auth' => \App\GraphQL\Middleware\AuthHeader::class,
         // 'auth' => [
         //     'except' => ['all']
         // ]

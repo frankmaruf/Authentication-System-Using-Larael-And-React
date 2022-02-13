@@ -36,10 +36,10 @@ class LoginResponseType extends GraphQLType
                 'type' => Type::nonNull(GraphQL::type('User')),
                 'description' => 'User'
             ],
-            'cookie' => [
-                'type' => Type::nonNull(Type::string()),
-                'description' => 'Cookie'
-            ],
+            // 'cookie' => [
+            //     'type' => Type::nonNull(Type::string()),
+            //     'description' => 'Cookie'
+            // ],
         ];
     }
 }

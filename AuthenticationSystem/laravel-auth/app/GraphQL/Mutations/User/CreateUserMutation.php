@@ -42,9 +42,16 @@ class CreateUserMutation extends Mutation
     public function resolve($root, $args)
     {
         $user = new User();
-        $user->fill($args);
+        $password = bcrypt($args['password']);
+        $user->fill(
+            [
+                'first_name' => $args['first_name'],
+                'last_name' => $args['last_name'],
+                'email' => $args['email'],
+                'password' => $password
+            ]
+        );
         $user->save();
-
         return $user;
     }
 }

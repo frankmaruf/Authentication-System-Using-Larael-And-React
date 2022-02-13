@@ -12,10 +12,6 @@ use Rebing\GraphQL\Support\Mutation;
 use Rebing\GraphQL\Support\Facades\GraphQL;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-// import Graphqltype
-use Rebing\GraphQL\Support\Type as GraphQLType;
 
 class UserLoginMutation extends Mutation
 {
@@ -73,7 +69,6 @@ class UserLoginMutation extends Mutation
             $response = [
                 'user' => $user,
                 'access_token' => $token,
-                'cookie' => $cookie,
                 'expires_in' => $expires_in,
                 'token_type' => 'Bearer',
                 'message' => $message,

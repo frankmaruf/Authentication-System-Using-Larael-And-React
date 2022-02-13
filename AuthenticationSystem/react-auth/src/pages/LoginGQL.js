@@ -23,7 +23,6 @@ const LoginGQL = () => {
       password: "${loginData.password}"
     )
     {
-      cookie
       message
       access_token
     }

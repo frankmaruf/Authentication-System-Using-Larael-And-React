@@ -103,8 +103,15 @@ return [
             ],
             // Laravel HTTP middleware
             'middleware' => [
+                // 'auth' => \App\GraphQL\Middleware\AuthHeader::class,
                 // 'auth' => [
-                //     'only' => ['user', 'users'],
+                //     'only' => [
+                //         'user', 'users', 'quest', 'quests', 'category', 'categories'
+                //     ],
+                //     'except' => [
+                //         'userLogin',"users"
+                //     ]
+                // ],
                 // \App\Http\Middleware\ExampleMiddleware::class,'
                 \Illuminate\Cookie\Middleware\EncryptCookies::class,
                 \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
