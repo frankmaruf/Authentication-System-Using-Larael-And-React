@@ -12,6 +12,7 @@
         "laravel/passport": "^10.3",
         "laravel/sanctum": "^2.14",
         "laravel/tinker": "^2.5",
+        "laravel/ui": "^3.4",
         "rebing/graphql-laravel": "^8.2",
         "symfony/mailer": "^5.4",
         "webonyx/graphql-php": "^14.11"

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
-const Login = () => {
+const Login = ({setLogin}) => {
   const navigate = useNavigate();
   const [data,setData] = useState({
     email: "",
@@ -19,6 +19,7 @@ const Login = () => {
       console.log("res", res);
       if (res.data.message) {
         navigate("/", { replace: true,state:{email:data.email}});
+        setLogin();
 
       }
     });

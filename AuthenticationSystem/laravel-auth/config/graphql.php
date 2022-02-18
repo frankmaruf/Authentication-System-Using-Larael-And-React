@@ -6,14 +6,11 @@ return [
     'route' => [
         // The prefix for routes; do NOT use a leading slash!
         'prefix' => 'graphql',
-
         // The controller/method to use in GraphQL request.
         'controller' => \Rebing\GraphQL\GraphQLController::class . '@query',
-
         // Any middleware for the graphql route group
         // This middleware will apply to all schemas
         'middleware' => [],
-
         // Additional route group attributes
         //
         // Example:
@@ -22,7 +19,6 @@ return [
         //
         'group_attributes' => [],
     ],
-
     // The name of the default schema
     // Used when the route group is directly accessed
     'default_schema' => 'default',
@@ -103,36 +99,52 @@ return [
             ],
             // Laravel HTTP middleware
             'middleware' => [
-                // 'auth' => \App\GraphQL\Middleware\AuthHeader::class,
-                // 'auth' => [
+                'web',
+                // \App\Http\Middleware\CheckAccess::class,
+                'check-auth',
+                // 'check-auth' => [
                 //     'only' => [
-                //         'user', 'users', 'quest', 'quests', 'category', 'categories'
+                //         'user',
+                //         'users',
+                //         'quest',
+                //         'quests',
+                //         'category',
+                //         'categories',
+                //         'createUser',
+                //         'updateUser',
+                //         'deleteUser',
+                //         'createQuest',
+                //         'updateQuest',
+                //         'deleteQuest',
+                //         'createCategory',
+                //         'updateCategory',
+                //         'deleteCategory',
                 //     ],
                 //     'except' => [
-                //         'userLogin',"users"
+                //         'users',
+                //         'userLogin',
+                //         "LoginResponse",
+                //     ],
+                // ],
+                // 'gqlauth',
+                // 'gqlauth' => \Rebing\GraphQL\GraphQL::class . '@auth',
+                // 'gqlauth',
+                // 'gqlauth' => [
+                //     'only' => [
+                //         'user','quest', 'quests', 'category', 'categories'
+                //     ],
+                //     'except' => [
+                //         'userLogin',"users" ,
                 //     ]
                 // ],
-                // \App\Http\Middleware\ExampleMiddleware::class,'
                 \Illuminate\Cookie\Middleware\EncryptCookies::class,
                 \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
-
             ],
-
-
             // Which HTTP methods to support; must be given in UPPERCASE!
             'method' => ['GET', 'POST'],
-
             // An array of middlewares, overrides the global ones
-            'execution_middleware' => null,
-        ],
-        'secret' => [
-            'query' => [
-                'mySecretQuery' => \App\GraphQL\Queries\Secret\MySecretQuery::class,
-            ],
-            'mutation' => [
-                'createSecret' => \App\GraphQL\Mutations\Secret\CreateSecretMutation::class,
-                'updateSecret' => \App\GraphQL\Mutations\Secret\UpdateSecretMutation::class,
-                'deleteSecret' => \App\GraphQL\Mutations\Secret\DeleteSecretMutation::class,
+            'execution_middleware' => [
+                \Rebing\GraphQL\Support\ExecutionMiddleware\UnusedVariablesMiddleware::class,
             ],
         ],
     ],

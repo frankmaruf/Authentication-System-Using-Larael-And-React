@@ -21,7 +21,6 @@ class TestAuthHeader extends Middleware
             ];
             return $response;
         }
-
         return $next($root, $args, $context, $info);
     }
     //     $headers = $context['request']->headers->all();

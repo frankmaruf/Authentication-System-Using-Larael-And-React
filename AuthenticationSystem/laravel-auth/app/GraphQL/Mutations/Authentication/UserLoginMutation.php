@@ -1,11 +1,8 @@
 <?php
 
 namespace App\GraphQL\Mutations\Authentication;
-
-
 use App\Models\User;
 use Closure;
-use Exception;
 use GraphQL\Type\Definition\ResolveInfo;
 use GraphQL\Type\Definition\Type;
 use Rebing\GraphQL\Support\Mutation;
@@ -52,27 +49,21 @@ class UserLoginMutation extends Mutation
             ];
             return $response;
         }
-        // if(Auth::user()->is_active == 0){
-        //     return null;
-        // }
-        // if($user && !Hash::check($args['password'], !Auth::user()->password)){
-        //     throw new Exception('Error login');
-        //     return null;
-        // }
-            $user = User::where('email', $args['email'])->first();
-            $token = $user->createToken('authToken')->accessToken;
-            $user->save();
-            $expires_in = 60*24*30;
-            $message = 'Login Successfully';
-            $cookie = Cookie::make('token', $token, $expires_in);
-            Cookie::queue($cookie);
-            $response = [
-                'user' => $user,
-                'access_token' => $token,
-                'expires_in' => $expires_in,
-                'token_type' => 'Bearer',
-                'message' => $message,
-            ];
-            return $response;
+        // $user = User::where('email', $args['email'])->first();
+        /** @var \App\Models\MyUserModel $user **/
+        $user = Auth::user();
+        $token = $user->createToken('authToken')->plainTextToken;
+        $expires_in = 60 * 24 * 7;
+        $message = 'Login Successfully';
+        $cookie = Cookie::make('token', $token, $expires_in, '/', 'localhost', false, true);
+        Cookie::queue($cookie);
+        $response = [
+            'user' => $user,
+            'access_token' => $token,
+            'expires_in' => $expires_in,
+            'token_type' => 'Bearer',
+            'message' => $message,
+        ];
+        return $response;
     }
-    }
+}

@@ -6,6 +6,7 @@ namespace App\GraphQL\Middleware;
 
 use Closure;
 use GraphQL\Type\Definition\ResolveInfo;
+use Illuminate\Http\Client\Request;
 use Rebing\GraphQL\Support\Middleware;
 use Illuminate\Pagination\Paginator;
 class ResolvePage extends Middleware

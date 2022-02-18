@@ -8,6 +8,7 @@ import {
   InMemoryCache,
   ApolloProvider,
   useQuery,
+  HttpLink,
   gql,
 } from "@apollo/client";
 import { onError } from "@apollo/client/link/error";
@@ -24,6 +25,11 @@ axios.defaults.withCredentials = true;
 const client = new ApolloClient({
   uri: "http://localhost:8000/graphql",
   credentials: "include",
+  headers:{
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+  },
+  connectToDevTools: true,
   cache: new InMemoryCache(),
   // request: (operation) => {
   //   const token = localStorage.getItem("token");
